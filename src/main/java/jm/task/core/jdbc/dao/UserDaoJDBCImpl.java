@@ -3,6 +3,7 @@ package jm.task.core.jdbc.dao;
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -16,9 +17,8 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void createUsersTable() {
         try (Statement statement = Util.getConnection().createStatement();) {
-            statement.execute("CREATE TABLE users (id BIGINT, name varchar(50), lastname varchar(50), age TINYINT)");
+            statement.execute("CREATE TABLE users (id BIGINT auto_increment primary key, name varchar(50), lastname varchar(50), age TINYINT)");
         } catch (SQLException e){
-
         }
     }
 
@@ -43,13 +43,12 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void removeUserById(long id) {
-        String sqlRequest = "DELETE FROM users  WHERE ID IS "+id;
-        try (Statement statement = Util.getConnection().createStatement()) {
-            statement.executeUpdate(sqlRequest);
+        String sqlRequest = "DELETE FROM users WHERE ID = ?";
+        try (PreparedStatement preparedStatement = Util.getConnection().prepareStatement(sqlRequest)) {
+            preparedStatement.setLong(1, id);
         } catch (SQLException e){
             e.printStackTrace();
         }
-
     }
 
     public List<User> getAllUsers() {
