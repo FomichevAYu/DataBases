@@ -11,11 +11,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-    UserServiceImpl userService = new UserServiceImpl();
-    userService.dropUsersTable();
-    userService.createUsersTable();
-    userService.saveUser("ололошка", "Ололоев", (byte)12);
-        userService.saveUser("ололошка1", "Ололоев1", (byte)123);
-        userService.removeUserById(1);
+
+
     }
 }
