@@ -30,9 +30,6 @@ public class Main {
         for (User user : list) {
             System.out.println(user.toString());
         }
-        userService.cleanUsersTable();
-        userService.dropUsersTable();
-        userService.createUsersTable();
 
     }
 }
