@@ -12,6 +12,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws SQLException {
         UserServiceImpl userService = new UserServiceImpl();
+
         userService.dropUsersTable();
         userService.createUsersTable();
         User user1 = new User("User1", "LastNameUser1", (byte) 12);
@@ -30,6 +31,5 @@ public class Main {
         for (User user : list) {
             System.out.println(user.toString());
         }
-
     }
 }
