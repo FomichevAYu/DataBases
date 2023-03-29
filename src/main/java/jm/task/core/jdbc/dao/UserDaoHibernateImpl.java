@@ -29,13 +29,11 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction.begin();
             session.createSQLQuery("CREATE TABLE users (id BIGINT auto_increment primary key, name varchar(50), lastname varchar(50), age TINYINT)").executeUpdate();
             transaction.commit();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             if (transaction.getStatus() == ACTIVE || transaction.getStatus() == MARKED_ROLLBACK) {
                 transaction.rollback();
             }
-        }
-        finally {
+        } finally {
             session.close();
         }
 
@@ -43,19 +41,17 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void dropUsersTable() {
-    Session session = Util.getSession();
-    Transaction transaction = session.getTransaction();
+        Session session = Util.getSession();
+        Transaction transaction = session.getTransaction();
         try {
             transaction.begin();
             session.createSQLQuery("DROP TABLE users").executeUpdate();
             transaction.commit();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             if (transaction.getStatus() == ACTIVE || transaction.getStatus() == MARKED_ROLLBACK) {
                 transaction.rollback();
             }
-        }
-        finally {
+        } finally {
             session.close();
         }
     }
@@ -69,8 +65,7 @@ public class UserDaoHibernateImpl implements UserDao {
             User user = new User(name, lastName, age);
             session.persist(user);
             transaction.commit();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             if (transaction.getStatus() == ACTIVE || transaction.getStatus() == MARKED_ROLLBACK) {
                 transaction.rollback();
             }
@@ -90,13 +85,11 @@ public class UserDaoHibernateImpl implements UserDao {
             User user = session.find(User.class, id);
             session.remove(user);
             transaction.commit();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             if (transaction.getStatus() == ACTIVE || transaction.getStatus() == MARKED_ROLLBACK) {
                 transaction.rollback();
             }
-        }
-        finally {
+        } finally {
             session.close();
         }
 
@@ -105,7 +98,7 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public List<User> getAllUsers() {
         Session session = Util.getSession();
-        List <User> list = session.createQuery("from User", User.class).getResultList();
+        List<User> list = session.createQuery("from User", User.class).getResultList();
         session.close();
         return list;
     }
@@ -118,13 +111,11 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction.begin();
             session.createSQLQuery("DELETE from users").executeUpdate();
             transaction.commit();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             if (transaction.getStatus() == ACTIVE || transaction.getStatus() == MARKED_ROLLBACK) {
                 transaction.rollback();
             }
-        }
-        finally {
+        } finally {
             session.close();
         }
 
