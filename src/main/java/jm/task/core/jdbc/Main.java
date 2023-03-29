@@ -13,9 +13,9 @@ public class Main {
     public static void main(String[] args) throws SQLException {
         UserServiceImpl userService = new UserServiceImpl();
 
-        userService.dropUsersTable();
-        userService.createUsersTable();
-        User user1 = new User("User1", "LastNameUser1", (byte) 12);
+       userService.dropUsersTable();
+       userService.createUsersTable();
+       User user1 = new User("User1", "LastNameUser1", (byte) 12);
         userService.saveUser(user1.getName(), user1.getLastName(), user1.getAge());
         System.out.println("User с именем " + user1.getName() + " добавлен в таблицу");
         User user2 = new User("User2", "LastNameUser2", (byte) 13);
